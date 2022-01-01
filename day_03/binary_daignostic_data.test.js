@@ -1,5 +1,5 @@
 const { tests, eq } = require("../jstinytest");
-const { compare, flipbit, extractBinary, extract } = require("./utils");
+const { compare, flipbit, extractBinary, extract } = require("../utils");
 
 tests({
   "Flip bit": () => {
