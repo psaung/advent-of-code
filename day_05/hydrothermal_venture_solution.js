@@ -37,6 +37,10 @@ function drawDiagonal(x0, y0, x1, y1) {
   return result;
 }
 
+function isGridData(x) {
+  return x[0][1] === x[1][1] || x[1][0] === x[0][0];
+}
+
 function solution1(inputs) {
   let result = inputs.split("\n").map((v) => v.split(" -> "));
   let count = {};
@@ -45,9 +49,7 @@ function solution1(inputs) {
     x.map((v) => v.split(",").map((v) => parseInt(v)))
   );
 
-  const gridData = splitGridData.filter((x) => {
-    return x[0][1] === x[1][1] || x[1][0] === x[0][0];
-  });
+  const gridData = splitGridData.filter(isGridData);
 
   gridData.forEach((v) => {
     const [[x1, y1], [x2, y2]] = v;
@@ -62,7 +64,7 @@ function solution1(inputs) {
     });
   });
 
-  console.log(Object.keys(count).filter((key) => count[key] > 1).length);
+  return Object.keys(count).filter((key) => count[key] > 1).length;
 }
 
 function solution2(inputs) {
@@ -76,7 +78,7 @@ function solution2(inputs) {
   gridData.forEach((v) => {
     let arr = [];
     const [[x1, y1], [x2, y2]] = v;
-    if (x1 === x2 || y1 === y2) {
+    if (isGridData(v)) {
       arr =
         x1 === x2
           ? drawStraight(y1, y2, "x", x1)
@@ -89,8 +91,8 @@ function solution2(inputs) {
     });
   });
 
-  console.log(Object.keys(count).filter((key) => count[key] > 1).length);
+  return Object.keys(count).filter((key) => count[key] > 1).length;
 }
 
-solution1(inputs);
-solution2(inputs);
+console.log(solution1(inputs));
+console.log(solution2(inputs));
