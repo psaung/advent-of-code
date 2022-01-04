@@ -41,6 +41,15 @@ function deepClone(arr) {
   return JSON.parse(JSON.stringify(arr));
 }
 
+function getDirection(v, row, rowCount) {
+  return [
+    /*left*/ v % rowCount > 0 ? v - 1 : null,
+    /*right*/ v < (parseInt(v / rowCount) + 1) * rowCount - 1 ? v + 1 : null,
+    /*top*/ v > rowCount - 1 ? v - rowCount : null,
+    /*bottom*/ v < (row - 1) * rowCount ? v + rowCount : null,
+  ];
+}
+
 module.exports = {
   compare,
   flipbit,
